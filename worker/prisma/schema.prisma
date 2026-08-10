@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+model Submissions {
+  id        String   @id @default(uuid())
+  code      String
+  language  String
+  status    Status   @default(PENDING)
+  output    String?
+}
