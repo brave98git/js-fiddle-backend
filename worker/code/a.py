@@ -1,1 +1,1 @@
-print('Hello from Python!')
+console.log('Hi Samarth')
