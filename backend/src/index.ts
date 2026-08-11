@@ -27,11 +27,32 @@ app.post("/submission", async (req, res) => {
 
   try {
     await client.lPush("problems", JSON.stringify({ submissionId: response.id, code, language }));
-    return res.status(200).json({ message: "processing" });
+    return res.status(200).json({ message: "processing", submissionId: response.id });
   } catch (err) {
     return res
       .status(500)
       .json({ message: "Error adding submission to queue" });
+  }
+});
+
+
+app.get("/submission/:submissionId", async (req, res) => {
+  const { submissionId } = req.params;
+
+  try {
+    const submission = await db.submissions.findUnique({
+      where: {
+        id: submissionId,
+      },
+    });
+
+    if (!submission) {
+      return res.status(404).json({ message: "Submission not found" });
+    }
+
+    return res.status(200).json(submission);
+  } catch (err) {
+    return res.status(500).json({ message: "Error fetching submission" });
   }
 });
 
