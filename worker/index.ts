@@ -6,8 +6,9 @@ import { db as prisma } from "./src/db";
 const client = createClient();
 await client.connect();
 
-async function collectOutput(proc: any): Promise<string> {
-  const reader = proc.stdout?.getReader();
+async function collectStream(stream: any): Promise<string> {
+  if (!stream) return "";
+  const reader = stream.getReader();
   const decoder = new TextDecoder();
   let buffer = "";
 
@@ -22,7 +23,9 @@ async function collectOutput(proc: any): Promise<string> {
 
 async function compileCpp(filePath: string, outputFilePath: string, submissionId: string) {
   console.log("Compiling C++ code...");
-  const compileProc = spawn(["g++", filePath, "-o", outputFilePath]);
+  const compileProc = spawn(["g++", filePath, "-o", outputFilePath], {
+    stderr: "pipe"
+  });
   await compileProc.exited;
 
   if (compileProc.exitCode !== 0) {
@@ -30,7 +33,7 @@ async function compileCpp(filePath: string, outputFilePath: string, submissionId
     console.error("Compilation failed:\n", compileErr);
     await prisma.submissions.update({
       where: { id: submissionId },
-      data: { status: "REJECTED", output: compileErr },
+      data: { status: "REJECTED", stdErr: compileErr },
     });
     return false;
   }
@@ -41,16 +44,29 @@ async function compileCpp(filePath: string, outputFilePath: string, submissionId
 
 
 async function runProgram(command: string[], submissionId: string, language: string) {
-  const proc = spawn(command);
-  const output = await collectOutput(proc);
+  const proc = spawn(command, {
+    stdout: "pipe",
+    stderr: "pipe"
+  });
+  const stdoutPromise = collectStream(proc.stdout);
+  const stderrPromise = collectStream(proc.stderr);
+
+  const [output, stdErr] = await Promise.all([stdoutPromise, stderrPromise]);
   await proc.exited;
 
   const finalStatus = proc.exitCode === 0 ? "ACCEPTED" : "REJECTED";
   console.log("Program output:\n", output);
+  if (stdErr) {
+    console.error("Program stderr:\n", stdErr);
+  }
 
   await prisma.submissions.update({
     where: { id: submissionId },
-    data: { status: finalStatus, output },
+    data: { 
+      status: finalStatus, 
+      output,
+      stdErr: stdErr || null
+    },
   });
 }
 

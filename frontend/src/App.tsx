@@ -11,6 +11,7 @@ export function App() {
   const [code, setCode] = useState("");
   const [status, setStatus] = useState<"IDLE" | "PENDING" | "ACCEPTED" | "REJECTED" | "ERROR">("IDLE");
   const [output, setOutput] = useState("");
+  const [stdErr, setStdErr] = useState("");
   const [currentSubmissionId, setCurrentSubmissionId] = useState<string | null>(null);
 
   const handleLanguageChange = (lang: "c++" | "javascript" | "python") => {
@@ -20,6 +21,7 @@ export function App() {
   const runCode = async () => {
     setStatus("PENDING");
     setOutput("");
+    setStdErr("");
     try {
       const response = await axios.post(`${BACKEND_URL}/submission`, {
         code,
@@ -60,7 +62,8 @@ export function App() {
           }
         } else {
           setStatus(data.status);
-          setOutput(data.output || "Program finished with no output.");
+          setOutput(data.output || "");
+          setStdErr(data.stdErr || "");
         }
       } catch (err: any) {
         console.error("Polling error:", err);
@@ -210,16 +213,27 @@ export function App() {
           </div>
 
           <div className="flex-1 p-6 font-mono text-sm leading-6 overflow-auto bg-slate-950/60 flex flex-col justify-between">
-            {output ? (
-              <pre className={`whitespace-pre-wrap ${status === "REJECTED" ? "text-rose-400" : "text-emerald-300"}`}>
-                {output}
-              </pre>
+            {output || stdErr ? (
+              <div className="space-y-6">
+                {output && (
+                  <div>
+                    <div className="text-[10px] uppercase tracking-wider text-slate-500 font-bold mb-1 select-none">Standard Output</div>
+                    <pre className="whitespace-pre-wrap text-emerald-300">{output}</pre>
+                  </div>
+                )}
+                {stdErr && (
+                  <div>
+                    <div className="text-[10px] uppercase tracking-wider text-rose-500 font-bold mb-1 select-none">Standard Error / Errors</div>
+                    <pre className="whitespace-pre-wrap text-rose-400 bg-rose-950/20 p-3 rounded-lg border border-rose-950/40">{stdErr}</pre>
+                  </div>
+                )}
+              </div>
             ) : status === "PENDING" ? (
               <div className="text-slate-500 italic animate-pulse">Waiting for the background worker to execute code...</div>
             ) : status === "IDLE" ? (
               <div className="text-slate-600 italic">Press "Run Code" to compile and run your code asynchronously using Redis queue.</div>
             ) : (
-              <div className="text-slate-500 italic">No output produced.</div>
+              <div className="text-slate-500 italic">Program finished with no output.</div>
             )}
 
             {currentSubmissionId && (

@@ -535,7 +535,8 @@ export const SubmissionsScalarFieldEnum = {
   code: 'code',
   language: 'language',
   status: 'status',
-  output: 'output'
+  output: 'output',
+  stdErr: 'stdErr'
 } as const
 
 export type SubmissionsScalarFieldEnum = (typeof SubmissionsScalarFieldEnum)[keyof typeof SubmissionsScalarFieldEnum]

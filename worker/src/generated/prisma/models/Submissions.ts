@@ -30,6 +30,7 @@ export type SubmissionsMinAggregateOutputType = {
   language: string | null
   status: $Enums.Status | null
   output: string | null
+  stdErr: string | null
 }
 
 export type SubmissionsMaxAggregateOutputType = {
@@ -38,6 +39,7 @@ export type SubmissionsMaxAggregateOutputType = {
   language: string | null
   status: $Enums.Status | null
   output: string | null
+  stdErr: string | null
 }
 
 export type SubmissionsCountAggregateOutputType = {
@@ -46,6 +48,7 @@ export type SubmissionsCountAggregateOutputType = {
   language: number
   status: number
   output: number
+  stdErr: number
   _all: number
 }
 
@@ -56,6 +59,7 @@ export type SubmissionsMinAggregateInputType = {
   language?: true
   status?: true
   output?: true
+  stdErr?: true
 }
 
 export type SubmissionsMaxAggregateInputType = {
@@ -64,6 +68,7 @@ export type SubmissionsMaxAggregateInputType = {
   language?: true
   status?: true
   output?: true
+  stdErr?: true
 }
 
 export type SubmissionsCountAggregateInputType = {
@@ -72,6 +77,7 @@ export type SubmissionsCountAggregateInputType = {
   language?: true
   status?: true
   output?: true
+  stdErr?: true
   _all?: true
 }
 
@@ -153,6 +159,7 @@ export type SubmissionsGroupByOutputType = {
   language: string
   status: $Enums.Status
   output: string | null
+  stdErr: string | null
   _count: SubmissionsCountAggregateOutputType | null
   _min: SubmissionsMinAggregateOutputType | null
   _max: SubmissionsMaxAggregateOutputType | null
@@ -182,6 +189,7 @@ export type SubmissionsWhereInput = {
   language?: Prisma.StringFilter<"Submissions"> | string
   status?: Prisma.EnumStatusFilter<"Submissions"> | $Enums.Status
   output?: Prisma.StringNullableFilter<"Submissions"> | string | null
+  stdErr?: Prisma.StringNullableFilter<"Submissions"> | string | null
 }
 
 export type SubmissionsOrderByWithRelationInput = {
@@ -190,6 +198,7 @@ export type SubmissionsOrderByWithRelationInput = {
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   output?: Prisma.SortOrderInput | Prisma.SortOrder
+  stdErr?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type SubmissionsWhereUniqueInput = Prisma.AtLeast<{
@@ -201,6 +210,7 @@ export type SubmissionsWhereUniqueInput = Prisma.AtLeast<{
   language?: Prisma.StringFilter<"Submissions"> | string
   status?: Prisma.EnumStatusFilter<"Submissions"> | $Enums.Status
   output?: Prisma.StringNullableFilter<"Submissions"> | string | null
+  stdErr?: Prisma.StringNullableFilter<"Submissions"> | string | null
 }, "id">
 
 export type SubmissionsOrderByWithAggregationInput = {
@@ -209,6 +219,7 @@ export type SubmissionsOrderByWithAggregationInput = {
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   output?: Prisma.SortOrderInput | Prisma.SortOrder
+  stdErr?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.SubmissionsCountOrderByAggregateInput
   _max?: Prisma.SubmissionsMaxOrderByAggregateInput
   _min?: Prisma.SubmissionsMinOrderByAggregateInput
@@ -223,6 +234,7 @@ export type SubmissionsScalarWhereWithAggregatesInput = {
   language?: Prisma.StringWithAggregatesFilter<"Submissions"> | string
   status?: Prisma.EnumStatusWithAggregatesFilter<"Submissions"> | $Enums.Status
   output?: Prisma.StringNullableWithAggregatesFilter<"Submissions"> | string | null
+  stdErr?: Prisma.StringNullableWithAggregatesFilter<"Submissions"> | string | null
 }
 
 export type SubmissionsCreateInput = {
@@ -231,6 +243,7 @@ export type SubmissionsCreateInput = {
   language: string
   status?: $Enums.Status
   output?: string | null
+  stdErr?: string | null
 }
 
 export type SubmissionsUncheckedCreateInput = {
@@ -239,6 +252,7 @@ export type SubmissionsUncheckedCreateInput = {
   language: string
   status?: $Enums.Status
   output?: string | null
+  stdErr?: string | null
 }
 
 export type SubmissionsUpdateInput = {
@@ -247,6 +261,7 @@ export type SubmissionsUpdateInput = {
   language?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   output?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stdErr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionsUncheckedUpdateInput = {
@@ -255,6 +270,7 @@ export type SubmissionsUncheckedUpdateInput = {
   language?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   output?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stdErr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionsCreateManyInput = {
@@ -263,6 +279,7 @@ export type SubmissionsCreateManyInput = {
   language: string
   status?: $Enums.Status
   output?: string | null
+  stdErr?: string | null
 }
 
 export type SubmissionsUpdateManyMutationInput = {
@@ -271,6 +288,7 @@ export type SubmissionsUpdateManyMutationInput = {
   language?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   output?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stdErr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionsUncheckedUpdateManyInput = {
@@ -279,6 +297,7 @@ export type SubmissionsUncheckedUpdateManyInput = {
   language?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.EnumStatusFieldUpdateOperationsInput | $Enums.Status
   output?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stdErr?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type SubmissionsCountOrderByAggregateInput = {
@@ -287,6 +306,7 @@ export type SubmissionsCountOrderByAggregateInput = {
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   output?: Prisma.SortOrder
+  stdErr?: Prisma.SortOrder
 }
 
 export type SubmissionsMaxOrderByAggregateInput = {
@@ -295,6 +315,7 @@ export type SubmissionsMaxOrderByAggregateInput = {
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   output?: Prisma.SortOrder
+  stdErr?: Prisma.SortOrder
 }
 
 export type SubmissionsMinOrderByAggregateInput = {
@@ -303,6 +324,7 @@ export type SubmissionsMinOrderByAggregateInput = {
   language?: Prisma.SortOrder
   status?: Prisma.SortOrder
   output?: Prisma.SortOrder
+  stdErr?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -325,6 +347,7 @@ export type SubmissionsSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   language?: boolean
   status?: boolean
   output?: boolean
+  stdErr?: boolean
 }, ExtArgs["result"]["submissions"]>
 
 export type SubmissionsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -333,6 +356,7 @@ export type SubmissionsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   language?: boolean
   status?: boolean
   output?: boolean
+  stdErr?: boolean
 }, ExtArgs["result"]["submissions"]>
 
 export type SubmissionsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -341,6 +365,7 @@ export type SubmissionsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   language?: boolean
   status?: boolean
   output?: boolean
+  stdErr?: boolean
 }, ExtArgs["result"]["submissions"]>
 
 export type SubmissionsSelectScalar = {
@@ -349,9 +374,10 @@ export type SubmissionsSelectScalar = {
   language?: boolean
   status?: boolean
   output?: boolean
+  stdErr?: boolean
 }
 
-export type SubmissionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "language" | "status" | "output", ExtArgs["result"]["submissions"]>
+export type SubmissionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "code" | "language" | "status" | "output" | "stdErr", ExtArgs["result"]["submissions"]>
 
 export type $SubmissionsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Submissions"
@@ -362,6 +388,7 @@ export type $SubmissionsPayload<ExtArgs extends runtime.Types.Extensions.Interna
     language: string
     status: $Enums.Status
     output: string | null
+    stdErr: string | null
   }, ExtArgs["result"]["submissions"]>
   composites: {}
 }
@@ -790,6 +817,7 @@ export interface SubmissionsFieldRefs {
   readonly language: Prisma.FieldRef<"Submissions", 'String'>
   readonly status: Prisma.FieldRef<"Submissions", 'Status'>
   readonly output: Prisma.FieldRef<"Submissions", 'String'>
+  readonly stdErr: Prisma.FieldRef<"Submissions", 'String'>
 }
     
 

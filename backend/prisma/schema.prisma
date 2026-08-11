@@ -19,4 +19,5 @@ model Submissions {
   language  String
   status    Status   @default(PENDING)
   output    String?
+  stdErr    String?
 }
