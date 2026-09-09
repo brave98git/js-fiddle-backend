@@ -31,6 +31,6 @@
   },
   "scripts": {
     "dev": "bun --watch src/index.ts",
-    "prisma": "bun --bun prisma"
+    "prisma": "bun run --env-file=.env node_modules/prisma/build/index.js"
   }
 }

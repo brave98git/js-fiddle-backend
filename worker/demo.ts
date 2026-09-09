@@ -4,7 +4,7 @@ import { spawn } from "bun";
 import { db } from "./src/db"; // assume pg client wrapper
 
 // Utility: collect stdout chunks into a string
-async function collectOutput(proc) {
+async function collectOutput(proc:any) {
   const reader = proc.stdout?.getReader();
   const decoder = new TextDecoder();
   let buffer = "";

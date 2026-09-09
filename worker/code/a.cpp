@@ -1,11 +1,15 @@
 #include <iostream>
-using namespace std;
+#include <vector>
+#include <numeric>
 
 int main() {
-    int arr[5];
+    std::cout << "FIDDLE C++ Runtime Initialized\n";
     
-
-    for (int i = 0; i < n; i++) {
-        cout << arri] << " ";
-    }
+    std::vector<int> numbers = {10, 20, 30, 40, 50};
+    int total = 0;
+    for (int n : numbers) total += n;
+    
+    std::cout << "Sum of elements: " << total << "\n";
+    std::cout << "Execution completed successfully.\n";
+    return 0;
 }
